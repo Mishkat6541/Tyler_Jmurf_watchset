@@ -24,7 +24,7 @@ const values = [
   {
     icon: Gem,
     title: 'Premium Materials',
-    body: 'From 316L and 904L stainless steels to double-domed sapphire crystals and shell cordovan leather — we refuse to compromise on what you touch.',
+    body: 'From 316L and 904L stainless steels to double-domed sapphire crystals and shell cordovan leather - we refuse to compromise on what you touch.',
   },
   {
     icon: Wrench,
@@ -41,10 +41,10 @@ const values = [
 const timeline = [
   { year: '2019', title: 'The First Kit', body: 'Founded with a single watch kit, two hundred customers, and the belief that the joy of mechanical watchmaking should be accessible to everyone.' },
   { year: '2020', title: 'Community Grows', body: 'Word spread among enthusiast forums. By end of year, 1,200 watches had been built and our community forum launched.' },
-  { year: '2021', title: 'Assembled Collection', body: 'By popular demand, we launched our first range of studio-assembled watches — built to the same standards as our kits, finished by hand.' },
+  { year: '2021', title: 'Assembled Collection', body: 'By popular demand, we launched our first range of studio-assembled watches - built to the same standards as our kits, finished by hand.' },
   { year: '2022', title: 'The Builder Tool', body: 'Our online watch configurator launched, letting customers design their own timepiece from case to strap before purchase.' },
   { year: '2023', title: 'International Reach', body: 'Expanded shipping to 48 countries. Builders on six continents now wear watches they built themselves with Horologer components.' },
-  { year: '2024', title: 'The Chrono Kit', body: 'Launched our most ambitious kit to date — a full column-wheel chronograph build for the most dedicated enthusiasts.' },
+  { year: '2024', title: 'The Chrono Kit', body: 'Launched our most ambitious kit to date - a full column-wheel chronograph build for the most dedicated enthusiasts.' },
 ]
 
 export default function AboutPage() {
@@ -86,7 +86,7 @@ export default function AboutPage() {
               <span className="italic block text-brand-gold"> True Luxury.</span>
             </motion.h1>
             <motion.p variants={fadeUp} custom={2} className="font-sans text-brand-light text-base leading-relaxed">
-              We are a team of engineers, watchmakers, and obsessive hobbyists who believe that building something with your hands — something that measures the very passage of life — is one of the finest things a person can do.
+              We are a team of engineers, watchmakers, and obsessive hobbyists who believe that building something with your hands - something that measures the very passage of life - is one of the finest things a person can do.
             </motion.p>
           </motion.div>
         </motion.div>
@@ -110,10 +110,10 @@ export default function AboutPage() {
                 <span className="italic"> Craft</span> of Watchmaking Accessible.
               </motion.h2>
               <motion.p variants={fadeUp} custom={2} className="font-sans text-brand-light text-sm leading-relaxed mb-6">
-                The Swiss watch industry spent a century making horology feel like an exclusive, untouchable art. We believe the opposite: that the magic of a mechanical watch is best understood when you assemble it yourself. When you feel the mainspring tension, seat the jewels, and hear the movement tick for the first time — that watch becomes something no shop could ever sell you.
+                The Swiss watch industry spent a century making horology feel like an exclusive, untouchable art. We believe the opposite: that the magic of a mechanical watch is best understood when you assemble it yourself. When you feel the mainspring tension, seat the jewels, and hear the movement tick for the first time - that watch becomes something no shop could ever sell you.
               </motion.p>
               <motion.p variants={fadeUp} custom={3} className="font-sans text-brand-light text-sm leading-relaxed mb-10">
-                We are not a traditional watch brand. We are a bridge between the watchmaker&apos;s bench and your wrist — providing the components, guidance, and community to make that journey extraordinary.
+                We are not a traditional watch brand. We are a bridge between the watchmaker&apos;s bench and your wrist - providing the components, guidance, and community to make that journey extraordinary.
               </motion.p>
               <motion.div variants={fadeUp} custom={4}>
                 <Link href="/shop?category=kit" className="btn-gold text-xs">

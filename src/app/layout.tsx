@@ -27,7 +27,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'Horologer — Craft Your Own Timepiece',
+    default: 'Horologer - Craft Your Own Timepiece',
     template: '%s | Horologer',
   },
   description:
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'Horologer',
-    title: 'Horologer — Craft Your Own Timepiece',
+    title: 'Horologer - Craft Your Own Timepiece',
     description: 'Premium watch kits and assembled mechanical timepieces for the modern horologist.',
   },
 }

@@ -85,7 +85,7 @@ function ShopContent() {
           <p className="font-sans text-xs tracking-widest3 uppercase text-brand-gold mb-3">Collection</p>
           <h1 className="font-serif text-5xl md:text-6xl text-brand-ivory">The Shop</h1>
           <p className="font-sans text-brand-muted text-sm mt-3 max-w-md">
-            {products.length} products — watch kits and assembled timepieces for every level.
+            {products.length} products - watch kits and assembled timepieces for every level.
           </p>
         </motion.div>
       </div>
@@ -148,7 +148,7 @@ function ShopContent() {
         </div>
 
         <div className="flex gap-12">
-          {/* Sidebar — desktop always visible, mobile toggle */}
+          {/* Sidebar - desktop always visible, mobile toggle */}
           <AnimatePresence>
             {(filterOpen || true) && (
               <motion.aside

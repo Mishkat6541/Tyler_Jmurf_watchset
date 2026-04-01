@@ -64,7 +64,7 @@ export default function ProductCard({ product, index = 0 }: Props) {
             {product.category === 'kit' ? 'Watch Kit' : 'Assembled'}
           </div>
 
-          {/* Quick add — slides up on hover */}
+          {/* Quick add - slides up on hover */}
           {product.inStock && (
             <motion.button
               initial={{ y: 20, opacity: 0 }}

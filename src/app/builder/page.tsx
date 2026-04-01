@@ -92,7 +92,7 @@ function WatchPreview({ config }: { config: WatchConfig }) {
           <circle cx="100" cy="160" r="50" fill="none" stroke={caseColor} strokeWidth="1" opacity="0.5" />
         )}
 
-        {/* Dial texture — subtle sunburst lines for light dials */}
+        {/* Dial texture - subtle sunburst lines for light dials */}
         {!isSkeletonDial && dialColor !== '#0D0D0D' && (
           <circle cx="100" cy="160" r="50" fill="url(#sunburst)" opacity="0.12" />
         )}
@@ -121,7 +121,7 @@ function WatchPreview({ config }: { config: WatchConfig }) {
         <rect x="97.5" y="113" width="5" height="14" rx="1" fill={dialColor === '#F5F0E8' ? '#1A1A1A' : '#C9A84C'} />
 
         {/* ── Hands ─────────────────────────────────────────── */}
-        {/* Hour hand — pointing to ~10 */}
+        {/* Hour hand - pointing to ~10 */}
         <g transform="rotate(-60 100 160)">
           <rect
             x={100 - hConf.hourW / 2}
@@ -133,7 +133,7 @@ function WatchPreview({ config }: { config: WatchConfig }) {
           />
         </g>
 
-        {/* Minute hand — pointing to ~2 */}
+        {/* Minute hand - pointing to ~2 */}
         <g transform="rotate(60 100 160)">
           <rect
             x={100 - hConf.minW / 2}

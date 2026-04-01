@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { ArrowRight, ChevronDown, Star, Wrench, Package, Watch } from 'lucide-react'
 import ProductCard from '@/components/ProductCard'
+import HeroVideo from '@/components/HeroVideo'
 import { products, testimonials } from '@/lib/data'
 
 const featuredKits      = products.filter(p => p.category === 'kit'      && p.featured)
@@ -43,111 +44,113 @@ function SectionHeading({ children, light = false }: { children: React.ReactNode
   )
 }
 
-// ── Hero ────────────────────────────────────────────────────────────────────
+// ── Hero - scroll-scrubbed frame sequence ────────────────────────────────────
 function Hero() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const y      = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  // 600vh section: sticky viewport locks in place while scroll drives frames
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  })
+
+  // Text stays fully visible for first 10%, then fades by 20%
+  const textOpacity = useTransform(scrollYProgress, [0, 0.1, 0.2], [1, 1, 0])
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
-      {/* Background image with parallax */}
-      <motion.div style={{ y }} className="absolute inset-0">
-        <Image
-          src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=1800&q=90"
-          alt="Luxury mechanical watch"
-          fill
-          className="object-cover object-center"
-          priority
-          sizes="100vw"
-        />
-        {/* Multi-layer overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/70 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-brand-black/20" />
-      </motion.div>
+    // Tall section: 100vh sticky viewport + scroll distance for scrubbing
+    <section ref={sectionRef} style={{ height: '600vh' }}>
+      {/* Sticky viewport - stays in place while user scrolls through the section */}
+      <div className="sticky top-0 h-screen overflow-hidden flex items-center">
 
-      {/* Content */}
-      <motion.div
-        style={{ opacity }}
-        className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 w-full"
-      >
+        {/* ── Frame sequence canvas - perfectly smooth scrubbing ── */}
+        <HeroVideo scrollYProgress={scrollYProgress} />
+
+        {/* Subtle gradient only on left edge so text stays readable, fades with text */}
         <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-          className="max-w-2xl"
+          style={{ opacity: textOpacity }}
+          className="absolute inset-0 bg-gradient-to-r from-brand-black/60 via-brand-black/20 to-transparent pointer-events-none"
+        />
+
+        {/* ── Hero text - fades out as user scrolls in ── */}
+        <motion.div
+          style={{ opacity: textOpacity }}
+          className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 w-full"
         >
-          {/* Eyebrow */}
-          <motion.p
-            variants={fadeUp}
-            custom={0}
-            className="font-sans text-xs tracking-widest3 uppercase text-brand-gold mb-6"
-          >
-            Premium Watchmaking Kits &amp; Assembled Timepieces
-          </motion.p>
-
-          {/* Headline — word by word */}
-          <div className="overflow-hidden mb-6">
-            <motion.h1
-              variants={fadeUp}
-              custom={1}
-              className="font-serif text-5xl md:text-7xl text-brand-ivory leading-[1.08]"
-            >
-              Craft Your Own
-              <span className="block italic text-brand-gold">Timepiece.</span>
-            </motion.h1>
-          </div>
-
-          <motion.p
-            variants={fadeUp}
-            custom={2}
-            className="font-sans text-base md:text-lg text-brand-light leading-relaxed max-w-md mb-10"
-          >
-            Precision-engineered watch kits and hand-assembled mechanical watches for the discerning enthusiast. No experience required — just patience, passion, and purpose.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
-            <Link href="/shop?category=kit" className="btn-gold group">
-              Shop Watch Kits
-              <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-            <Link href="/shop?category=assembled" className="btn-outline">
-              Assembled Collection
-            </Link>
-          </motion.div>
-
-          {/* Stats */}
           <motion.div
-            variants={fadeUp}
-            custom={4}
-            className="flex gap-10 mt-14 pt-10 border-t border-brand-border/50"
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="max-w-2xl"
           >
-            {[
-              { value: '12,000+', label: 'Watches Built' },
-              { value: '98%',     label: 'Satisfaction Rate' },
-              { value: '4.9★',    label: 'Average Rating' },
-            ].map(stat => (
-              <div key={stat.label}>
-                <p className="font-serif text-2xl text-brand-ivory">{stat.value}</p>
-                <p className="text-xs font-sans text-brand-muted mt-0.5 tracking-wider uppercase">{stat.label}</p>
-              </div>
-            ))}
+            <motion.p
+              variants={fadeUp}
+              custom={0}
+              className="font-sans text-xs tracking-widest3 uppercase text-brand-gold mb-6"
+            >
+              Premium Watchmaking Kits &amp; Assembled Timepieces
+            </motion.p>
+
+            <div className="overflow-hidden mb-6">
+              <motion.h1
+                variants={fadeUp}
+                custom={1}
+                className="font-serif text-5xl md:text-7xl text-brand-ivory leading-[1.08]"
+              >
+                Craft Your Own
+                <span className="block italic text-brand-gold">Timepiece.</span>
+              </motion.h1>
+            </div>
+
+            <motion.p
+              variants={fadeUp}
+              custom={2}
+              className="font-sans text-base md:text-lg text-brand-light leading-relaxed max-w-md mb-10"
+            >
+              Precision-engineered watch kits and hand-assembled mechanical watches for the discerning enthusiast. No experience required - just patience, passion, and purpose.
+            </motion.p>
+
+            <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
+              <Link href="/shop?category=kit" className="btn-gold group">
+                Shop Watch Kits
+                <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+              <Link href="/shop?category=assembled" className="btn-outline">
+                Assembled Collection
+              </Link>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              custom={4}
+              className="flex gap-10 mt-14 pt-10 border-t border-brand-border/50"
+            >
+              {[
+                { value: '12,000+', label: 'Watches Built' },
+                { value: '98%',     label: 'Satisfaction Rate' },
+                { value: '4.9★',    label: 'Average Rating' },
+              ].map(stat => (
+                <div key={stat.label}>
+                  <p className="font-serif text-2xl text-brand-ivory">{stat.value}</p>
+                  <p className="text-xs font-sans text-brand-muted mt-0.5 tracking-wider uppercase">{stat.label}</p>
+                </div>
+              ))}
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span className="text-[10px] font-sans tracking-widest uppercase text-brand-muted">Scroll</span>
-        <ChevronDown size={16} className="text-brand-muted animate-scrollBounce" />
-      </motion.div>
+        {/* Scroll indicator - only visible at top */}
+        <motion.div
+          style={{ opacity: textOpacity }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        >
+          <span className="text-[10px] font-sans tracking-widest uppercase text-brand-muted">Scroll to Disassemble</span>
+          <ChevronDown size={16} className="text-brand-muted animate-scrollBounce" />
+        </motion.div>
+      </div>
     </section>
   )
 }
@@ -233,7 +236,7 @@ function HowItWorks() {
             <SectionHeading light>The Art of Assembly</SectionHeading>
           </motion.div>
           <motion.p variants={fadeUp} custom={2} className="font-sans text-brand-charcoal/70 mt-4 max-w-md mx-auto text-sm leading-relaxed">
-            From box to wrist in three deliberate steps. No shortcuts — just the pleasure of precision.
+            From box to wrist in three deliberate steps. No shortcuts - just the pleasure of precision.
           </motion.p>
         </motion.div>
 
@@ -457,7 +460,7 @@ function Newsletter() {
             Join the Craftsmen
           </motion.h2>
           <motion.p variants={fadeUp} custom={2} className="font-sans text-brand-muted text-sm mb-10 leading-relaxed">
-            New kits, assembly tips, and horological stories — delivered to your inbox. No noise, only craft.
+            New kits, assembly tips, and horological stories - delivered to your inbox. No noise, only craft.
           </motion.p>
 
           {submitted ? (
