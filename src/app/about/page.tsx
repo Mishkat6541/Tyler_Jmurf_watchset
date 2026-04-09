@@ -43,7 +43,7 @@ const timeline = [
   { year: '2020', title: 'Community Grows', body: 'Word spread among enthusiast forums. By end of year, 1,200 watches had been built and our community forum launched.' },
   { year: '2021', title: 'Assembled Collection', body: 'By popular demand, we launched our first range of studio-assembled watches - built to the same standards as our kits, finished by hand.' },
   { year: '2022', title: 'The Builder Tool', body: 'Our online watch configurator launched, letting customers design their own timepiece from case to strap before purchase.' },
-  { year: '2023', title: 'International Reach', body: 'Expanded shipping to 48 countries. Builders on six continents now wear watches they built themselves with Horologer components.' },
+  { year: '2023', title: 'International Reach', body: 'Expanded shipping to 48 countries. Builders on six continents now wear watches they built themselves with Foundry components.' },
   { year: '2024', title: 'The Chrono Kit', body: 'Launched our most ambitious kit to date - a full column-wheel chronograph build for the most dedicated enthusiasts.' },
 ]
 
@@ -132,7 +132,7 @@ export default function AboutPage() {
               className="relative aspect-[4/5] overflow-hidden"
             >
               <Image
-                src="https://images.unsplash.com/photo-1614865054571-069af9ed7c25?w=900&q=85"
+                src="/images/Picture6.jpg"
                 alt="Watchmaking detail"
                 fill
                 className="object-cover"

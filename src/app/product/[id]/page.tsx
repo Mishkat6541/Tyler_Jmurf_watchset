@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -10,10 +10,8 @@ import { useCart } from '@/context/CartContext'
 import { products } from '@/lib/data'
 import ProductCard from '@/components/ProductCard'
 
-type Params = Promise<{ id: string }>
-
-export default function ProductPage({ params }: { params: Params }) {
-  const { id }    = use(params)
+export default function ProductPage({ params }: { params: { id: string } }) {
+  const { id }    = params
   const product   = products.find(p => p.id === id)
 
   if (!product) notFound()
@@ -351,7 +349,7 @@ export default function ProductPage({ params }: { params: Params }) {
               { name: 'Alex M.',    rating: 5, date: 'Jan 2025', body: 'Absolutely flawless kit. Every component fits perfectly and the guide is clear. Took me about 6 hours over a weekend. The end result is stunning.' },
               { name: 'Claire D.', rating: 5, date: 'Dec 2024', body: 'I gifted this to myself as a 40th birthday treat. Building it was meditative and the watch is indistinguishable from a $1,500 boutique piece.' },
               { name: 'Robert T.', rating: 4, date: 'Nov 2024', body: 'Quality is excellent throughout. The movement is smooth and accurate. Docking one star only because the leather strap takes time to break in - but that is to be expected with genuine leather.' },
-              { name: 'Sarah K.',  rating: 5, date: 'Oct 2024', body: 'My third Horologer kit. The quality consistency is what keeps me coming back. A flawless experience from unboxing to the first tick.' },
+              { name: 'Sarah K.',  rating: 5, date: 'Oct 2024', body: 'My third Foundry kit. The quality consistency is what keeps me coming back. A flawless experience from unboxing to the first tick.' },
             ].map((rev, i) => (
               <motion.div
                 key={i}

@@ -22,13 +22,13 @@ const dmSans = DM_Sans({
 })
 
 export const viewport: Viewport = {
-  themeColor: '#0A0A0A',
+  themeColor: '#0C0A07',
 }
 
 export const metadata: Metadata = {
   title: {
-    default: 'Horologer - Craft Your Own Timepiece',
-    template: '%s | Horologer',
+    default: 'Foundry - Craft Your Own Timepiece',
+    template: '%s | Foundry',
   },
   description:
     'Premium watch kits and fully assembled mechanical timepieces. Build your own luxury watch with precision components and expert guidance. Free worldwide shipping on orders over $500.',
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: 'website',
-    siteName: 'Horologer',
-    title: 'Horologer - Craft Your Own Timepiece',
+    siteName: 'Foundry',
+    title: 'Foundry - Craft Your Own Timepiece',
     description: 'Premium watch kits and assembled mechanical timepieces for the modern horologist.',
   },
 }

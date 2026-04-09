@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ShoppingBag, Menu, X } from 'lucide-react'
@@ -8,10 +9,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/context/CartContext'
 
 const navLinks = [
-  { href: '/',        label: 'Home'    },
-  { href: '/shop',    label: 'Shop'    },
-  { href: '/builder', label: 'Builder' },
-  { href: '/about',   label: 'About'   },
+  { href: '/',      label: 'Home'  },
+  { href: '/shop',  label: 'Shop'  },
+  { href: '/about', label: 'About' },
 ]
 
 export default function Navbar() {
@@ -44,13 +44,15 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-8 h-8 border border-brand-gold flex items-center justify-center">
-              <div className="w-3 h-3 bg-brand-gold rounded-full" />
-            </div>
-            <span className="font-serif text-xl tracking-[0.15em] text-brand-ivory uppercase">
-              Horologer
-            </span>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/Picture1-removebg-preview.png"
+              alt="Foundry"
+              width={120}
+              height={48}
+              className="object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}

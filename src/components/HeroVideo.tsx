@@ -14,6 +14,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence, type MotionValue } from 'framer-motion'
 
 interface Props {
@@ -221,14 +222,8 @@ export default function HeroVideo({ scrollYProgress }: Props) {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="flex items-center gap-3"
             >
-              <div className="w-8 h-8 border border-brand-gold flex items-center justify-center">
-                <div className="w-3 h-3 bg-brand-gold rounded-full" />
-              </div>
-              <span className="font-serif text-xl tracking-[0.15em] text-brand-ivory uppercase">
-                Horologer
-              </span>
+              <Image src="/images/Picture1-removebg-preview.png" alt="Foundry" width={120} height={48} className="object-contain" />
             </motion.div>
 
             {/* Gold progress bar */}

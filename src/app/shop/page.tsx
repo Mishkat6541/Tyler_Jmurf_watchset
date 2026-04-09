@@ -26,9 +26,9 @@ const SORT_OPTIONS = [
 
 function ShopContent() {
   const searchParams = useSearchParams()
-  const initialCategory = searchParams.get('category') as 'kit' | 'assembled' | null
+  const initialCategory = searchParams.get('category')
 
-  const [category,     setCategory]     = useState<'all' | 'kit' | 'assembled'>(initialCategory ?? 'all')
+  const [category,     setCategory]     = useState<'all' | 'assembled'>(initialCategory === 'assembled' ? 'assembled' : 'all')
   const [priceRange,   setPriceRange]   = useState<number | null>(null)
   const [materials,    setMaterials]    = useState<string[]>([])
   const [sort,         setSort]         = useState('featured')
@@ -68,7 +68,7 @@ function ShopContent() {
     materials.length
 
   const clearFilters = () => {
-    setCategory('all')
+    setCategory('all' as const)
     setPriceRange(null)
     setMaterials([])
   }
@@ -85,7 +85,7 @@ function ShopContent() {
           <p className="font-sans text-xs tracking-widest3 uppercase text-brand-gold mb-3">Collection</p>
           <h1 className="font-serif text-5xl md:text-6xl text-brand-ivory">The Shop</h1>
           <p className="font-sans text-brand-muted text-sm mt-3 max-w-md">
-            {products.length} products - watch kits and assembled timepieces for every level.
+            {products.length} timepieces - NH35 and NH70 mechanical watches, hand-assembled.
           </p>
         </motion.div>
       </div>
@@ -95,7 +95,7 @@ function ShopContent() {
         <div className="flex flex-wrap items-center justify-between gap-4 mb-10">
           {/* Category tabs */}
           <div className="flex gap-1 border border-brand-border p-1">
-            {(['all', 'kit', 'assembled'] as const).map(cat => (
+            {(['all', 'assembled'] as const).map(cat => (
               <button
                 key={cat}
                 onClick={() => setCategory(cat)}
@@ -105,7 +105,7 @@ function ShopContent() {
                     : 'text-brand-muted hover:text-brand-ivory'
                 }`}
               >
-                {cat === 'all' ? 'All' : cat === 'kit' ? 'Watch Kits' : 'Assembled'}
+                {cat === 'all' ? 'All' : 'Assembled'}
               </button>
             ))}
           </div>
@@ -203,16 +203,6 @@ function ShopContent() {
                   </ul>
                 </div>
 
-                {/* Builder promo */}
-                <div className="border border-brand-gold/30 p-5 space-y-3">
-                  <p className="font-sans text-xs tracking-widest uppercase text-brand-gold">Custom Build</p>
-                  <p className="text-sm font-sans text-brand-muted leading-relaxed">
-                    Design your own watch from case to strap.
-                  </p>
-                  <a href="/builder" className="text-xs font-sans text-brand-ivory hover:text-brand-gold transition-colors inline-flex items-center gap-1 group">
-                    Open Builder →
-                  </a>
-                </div>
               </motion.aside>
             )}
           </AnimatePresence>

@@ -1,11 +1,11 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Instagram, Twitter, Youtube, Mail } from 'lucide-react'
 
 const footerLinks = {
   Shop: [
     { label: 'Watch Kits',         href: '/shop?category=kit'      },
     { label: 'Assembled Watches',  href: '/shop?category=assembled'},
-    { label: 'Custom Builder',     href: '/builder'                },
     { label: 'Gift Cards',         href: '/shop?tag=gift'          },
   ],
   Company: [
@@ -37,14 +37,13 @@ export default function Footer() {
         <div className="py-16 grid grid-cols-2 md:grid-cols-5 gap-10">
           {/* Brand col */}
           <div className="col-span-2 md:col-span-2 space-y-5">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 border border-brand-gold flex items-center justify-center">
-                <div className="w-3 h-3 bg-brand-gold rounded-full" />
-              </div>
-              <span className="font-serif text-xl tracking-[0.15em] text-brand-ivory uppercase">
-                Horologer
-              </span>
-            </div>
+            <Image
+              src="/images/Picture1-removebg-preview.png"
+              alt="Foundry"
+              width={130}
+              height={52}
+              className="object-contain"
+            />
             <p className="text-sm font-sans text-brand-muted leading-relaxed max-w-xs">
               Precision components, curated kits, and fully assembled timepieces for the modern horologist. Crafted with intent. Built by you.
             </p>
@@ -91,7 +90,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs font-sans text-brand-muted">
-            © {new Date().getFullYear()} Horologer. All rights reserved.
+            © {new Date().getFullYear()} Foundry. All rights reserved.
           </p>
           <div className="flex gap-6">
             {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map(item => (

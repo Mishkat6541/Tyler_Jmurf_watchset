@@ -9,16 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'brand-black':    '#0A0A0A',
-        'brand-charcoal': '#1C1C1E',
-        'brand-surface':  '#242424',
-        'brand-border':   '#2E2E2E',
-        'brand-ivory':    '#F5F0E8',
-        'brand-ivory-dark': '#E8E2D4',
-        'brand-gold':     '#C9A84C',
-        'brand-gold-light': '#D9BC74',
-        'brand-muted':    '#6B6B6B',
-        'brand-light':    '#A0A0A0',
+        'brand-black':    '#0C0A07',
+        'brand-charcoal': '#1A1612',
+        'brand-surface':  '#231E18',
+        'brand-border':   '#332B22',
+        'brand-ivory':    '#F2EDE4',
+        'brand-ivory-dark': '#E5DED2',
+        'brand-gold':     '#9B7B38',
+        'brand-gold-light': '#B8944A',
+        'brand-muted':    '#6B6055',
+        'brand-light':    '#A09080',
       },
       fontFamily: {
         serif: ['var(--font-playfair)', 'Georgia', 'serif'],
