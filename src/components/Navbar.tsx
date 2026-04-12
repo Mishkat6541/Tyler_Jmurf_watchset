@@ -41,22 +41,22 @@ export default function Navbar() {
             : 'bg-transparent py-6'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-3 items-center">
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
+          {/* Left: Logo */}
+          <Link href="/" className="flex items-center justify-start">
             <Image
               src="/images/Picture1-removebg-preview.png"
               alt="Foundry"
-              width={120}
-              height={48}
+              width={200}
+              height={80}
               className="object-contain"
               priority
             />
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-10">
+          {/* Center: Desktop nav */}
+          <div className="hidden md:flex items-center justify-center gap-10">
             {navLinks.map(link => (
               <Link
                 key={link.href}
@@ -77,9 +77,8 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right actions */}
-          <div className="flex items-center gap-4">
-            {/* Cart */}
+          {/* Right: Cart + mobile toggle */}
+          <div className="flex items-center justify-end gap-4">
             <button
               onClick={openCart}
               className="relative p-2 text-brand-light hover:text-brand-ivory transition-colors duration-300"
@@ -98,7 +97,6 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Mobile menu toggle */}
             <button
               className="md:hidden p-2 text-brand-light hover:text-brand-ivory transition-colors duration-300"
               onClick={() => setMenuOpen(v => !v)}

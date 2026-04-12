@@ -2,9 +2,9 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useState, useRef } from 'react'
-import { ArrowRight, ChevronDown, Star } from 'lucide-react'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { useState, useRef, useEffect } from 'react'
+import { ArrowRight, Star } from 'lucide-react'
 import ProductCard from '@/components/ProductCard'
 import { products, testimonials } from '@/lib/data'
 
@@ -43,74 +43,86 @@ function SectionHeading({ children, light = false }: { children: React.ReactNode
 }
 
 // ── Hero - static image ──────────────────────────────────────────────────────
+const heroImages = [
+  '/images/hero/DSC00511.jpg',
+  '/images/hero/DSC00509.jpg',
+  '/images/hero/DSC00546.jpg',
+  '/images/hero/DSC00594.jpg',
+  '/images/hero/DSC00607.jpg',
+  '/images/hero/DSC00645.jpg',
+  '/images/hero/DSC00647.jpg',
+  '/images/hero/DSC00562.jpg',
+  '/images/hero/DSC00516.jpg',
+]
+
 function Hero() {
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent(i => (i + 1) % heroImages.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [])
+
   return (
-    <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
-      <Image
-        src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=1800&q=90"
-        alt="Luxury mechanical watch"
-        fill
-        className="object-cover object-center"
-        priority
-        sizes="100vw"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/70 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-black/60 via-transparent to-brand-black/20" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 w-full">
+    <section className="relative h-screen min-h-[600px] overflow-hidden bg-brand-black">
+      {/* Image crossfade */}
+      <AnimatePresence mode="sync">
         <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-          className="max-w-2xl"
+          key={current}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
+          className="absolute inset-0"
         >
-          <motion.p variants={fadeUp} custom={0} className="font-sans text-xs tracking-widest3 uppercase text-brand-gold mb-6">
-            Premium Mechanical Timepieces
-          </motion.p>
-
-          <motion.h1 variants={fadeUp} custom={1} className="font-serif text-5xl md:text-7xl text-brand-ivory leading-[1.08] mb-6">
-            Built for Those
-            <span className="block italic text-brand-gold">Who Notice.</span>
-          </motion.h1>
-
-          <motion.p variants={fadeUp} custom={2} className="font-sans text-base md:text-lg text-brand-light leading-relaxed max-w-md mb-10">
-            Hand-assembled mechanical watches with precision NH35 and NH70 movements. Each piece is selected for character, not compromise.
-          </motion.p>
-
-          <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
-            <Link href="/shop" className="btn-gold group">
-              Shop the Collection
-              <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-            <Link href="/about" className="btn-outline">
-              Our Story
-            </Link>
-          </motion.div>
-
-          <motion.div variants={fadeUp} custom={4} className="flex gap-10 mt-14 pt-10 border-t border-brand-border/50">
-            {[
-              { value: '12,000+', label: 'Watches Built' },
-              { value: '98%',     label: 'Satisfaction Rate' },
-              { value: '4.9★',    label: 'Average Rating' },
-            ].map(stat => (
-              <div key={stat.label}>
-                <p className="font-serif text-2xl text-brand-ivory">{stat.value}</p>
-                <p className="text-xs font-sans text-brand-muted mt-0.5 tracking-wider uppercase">{stat.label}</p>
-              </div>
-            ))}
-          </motion.div>
+          <Image
+            src={heroImages[current]}
+            alt="Foundry Watch"
+            fill
+            className="object-cover object-center"
+            priority={current === 0}
+            loading={current === 0 ? 'eager' : 'lazy'}
+            sizes="100vw"
+            quality={75}
+          />
         </motion.div>
-      </div>
+      </AnimatePresence>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
-      >
-        <span className="text-[10px] font-sans tracking-widest uppercase text-brand-muted">Scroll</span>
-        <ChevronDown size={16} className="text-brand-muted animate-scrollBounce" />
-      </motion.div>
+      {/* Subtle darkening vignette */}
+      <div className="absolute inset-0 bg-brand-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-black/70 via-transparent to-transparent" />
+
+      {/* Minimal bottom text + dots */}
+      <div className="absolute bottom-10 left-0 right-0 z-10 flex flex-col items-center gap-5">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 1 }}
+        >
+          <Link
+            href="/shop"
+            className="group inline-block font-sans text-[10px] tracking-[0.3em] uppercase text-brand-ivory/70 border border-transparent px-6 py-3 transition-all duration-500 hover:border-brand-ivory/40 hover:text-brand-ivory"
+          >
+            Shop the Collection
+          </Link>
+        </motion.div>
+
+        {/* Dot indicators */}
+        <div className="flex gap-2">
+          {heroImages.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`h-px transition-all duration-500 ${
+                i === current ? 'w-8 bg-brand-gold' : 'w-3 bg-brand-ivory/30 hover:bg-brand-ivory/60'
+              }`}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
     </section>
   )
 }
